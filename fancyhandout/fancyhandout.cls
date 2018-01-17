@@ -1,5 +1,5 @@
-%%	This is file 'fancyhandout.cls', Version 2017-12-08
-%%	Copyright 2017 Sebastian Friedl <sfr682k@t-online.de>
+%%	This is file 'fancyhandout.cls', Version 2017-01-18
+%%	Copyright 2017-18 Sebastian Friedl <sfr682k@t-online.de>
 %% 
 %%	This work may be distributed and/or modified under the conditions of the LaTeX Project
 %%	Public License, either version 1.3c of this license or (at your option) any later version.
@@ -25,7 +25,7 @@
 %%	--------------------------------------------------------------------------------------------------------------------------------------------- 
 
 
-\ProvidesClass{fancyhandout}[2017/12/08 fancyhandout development version]
+\ProvidesClass{fancyhandout}[2018/01/18 fancyhandout development version]
 
 
 
@@ -73,6 +73,9 @@
 % All options specified. Load article.
 \LoadClass{article}
 
+% Set \parindent to zero
+\parindent 0pt
+
 
 
 % REQUIRE "geometry" -----------------------------------------------------------------------------------------
@@ -101,6 +104,9 @@
 \RequirePackage{enumitem}
 	\setlist{itemsep=0ex,topsep=.75ex}
 
+
+\RequirePackage{xcolor}
+
 %\RequirePackage{tikz}
 
 
@@ -113,7 +119,115 @@
 
 
 
-% (RE-)DEFINE COMMANDS ---------------------------------------------------------------------------------------
+% TITLE COMMANDS ---------------------------------------------------------------------------------------------
 
-% TODO: Redefine \section etc.
+% Redefine the provided commands and define beamer-like commands inserting their values
+\def\title{}
+\let\inserttitle\@empty
+\let\insertshorttitle\@empty
+%
+\def\subtitle{}
+\let\insertsubtitle\@empty
+\let\insertshortsubtitle\@empty
+%
+\def\author{}
+\let\insertauthor\@empty
+\let\insertshortauthor\@empty
+\def\and{\qquad}
+%
+\def\date{}
+\let\insertdate\@empty
+\let\insertshortdate\@empty
+
+% Set the according variable when a command is used
+\renewcommand{\title}[2][\inserttitle]{%
+	\def\inserttitle{#2}%
+	\def\insertshorttitle{#1}}
+\renewcommand{\subtitle}[2][\insertsubtitle]{%
+	\def\insertsubtitle{#2}%
+	\def\insertshortsubtitle{#1}}
+\renewcommand{\author}[2][\insertauthor]{%
+	\def\insertauthor{#2}%
+	\def\insertshortauthor{#1}}
+\renewcommand{\date}[2][\insertdate]{%
+	\def\insertdate{#2}%
+	\def\insertshortdate{#1}}
+
+% TODO: Provide something to display the institute
+\def\maketitle{%
+	\thispagestyle{empty}
+	\begin{center}
+		\fcolorbox{black}{blue}{\fcolorbox{black}{blue!10}{%
+			\parbox{.95\textwidth}{\centering\vspace{\medskipamount}%
+				\ifx\inserttitle\@empty\else {\LARGE\bfseries\inserttitle} \\[\medskipamount] \fi
+				\ifx\insertsubtitle\@empty\else {\large\insertsubtitle} \\ \fi
+				\vspace{\medskipamount}\small
+				\ifx\insertauthor\@empty\else \insertauthor \\[\medskipamount] \fi
+				\insertdate
+		\vspace{\medskipamount}}}}%
+	\end{center}\smallskip}
+
+
+
+% SECTION COMMANDS -------------------------------------------------------------------------------------------
+
+% Own \section command
+\def\fancysection#1{%
+	\vskip 2\bigskipamount% \vskip, not \vspace; starts a new paragraph
+	\noindent%
+	\begin{minipage}{\textwidth}%
+	{\Large\bfseries%
+		#1}\vskip -1ex%
+	{\color{blue}\rule{\textwidth}{3pt}}
+	\end{minipage}
+	\vskip \bigskipamount%
+}
+
+% Own \subsection command
+\def\fancysubsection#1{%
+	\vskip 1.25\bigskipamount%
+	\noindent%
+	\begin{minipage}{\textwidth}%
+	{\large\bfseries%
+		#1}\vskip -1.25ex%
+	{\color{blue!70}\rule{\textwidth}{1.5pt}}
+	\end{minipage}
+	\vskip \medskipamount%
+}
+
+% Own \subsubsection command
+\def\fancysubsubsection#1{%
+	\vskip .75\bigskipamount% \vskip, not \vspace; starts a new paragraph
+	\noindent%
+	\begin{minipage}{\textwidth}%
+	{\bfseries%
+		#1}%
+	\end{minipage}
+	\vskip .75\smallskipamount%
+}
+
+% Redefine article's sectioning commands
+\def\section{\@ifstar\@@section\@section}
+\def\@section#1{%
+	% TODO: Add toc-entry and hyperref bookmark
+	\@@section{#1}}
+\def\@@section#1{\fancysection{#1}}
+
+\def\subsection{\@ifstar\@@subsection\@subsection}
+\def\@subsection#1{%
+	% TODO: Add toc-entry and hyperref bookmark
+	\@@subsection{#1}}
+\def\@@subsection#1{\fancysubsection{#1}}
+
+\def\subsubsection{\@ifstar\@@subsubsection\@subsubsection}
+\def\@subsubsection#1{%
+	% TODO: Add toc-entry and hyperref bookmark
+	\@@subsubsection{#1}}
+\def\@@subsubsection#1{\fancysubsubsection{#1}}
+
+
+
+% LEFT TODOS -------------------------------------------------------------------------------------------------
+
+
 % TODO: Beamer styled boxes!!

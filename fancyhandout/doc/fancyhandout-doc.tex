@@ -1,5 +1,5 @@
-%%	This is file 'fancyhandout-doc.tex', Version 2017-12-08
-%%	Copyright 2017 Sebastian Friedl <sfr682k@t-online.de>
+%%	This is file 'fancyhandout-doc.tex', Version 2018-01-18
+%%	Copyright 2017-18 Sebastian Friedl <sfr682k@t-online.de>
 %% 
 %%	This work may be distributed and/or modified under the conditions of the LaTeX Project
 %%	Public License, either version 1.3c of this license or (at your option) any later version.
@@ -28,12 +28,12 @@
 \documentclass[11pt]{ltxdoc}
 
 \usepackage{csquotes}
-\usepackage{hyperref}
+\usepackage[unicode, pdfborder={0 0 0}]{hyperref}
 \usepackage{verbatim}
 
 \usepackage{fontspec}
-\setmainfont[Numbers=OldStyle]{XCharter}
-\setsansfont[Scale=MatchLowercase, Numbers=OldStyle]{Source Sans Pro}
+\setmainfont{erewhon}
+\setsansfont[Scale=MatchLowercase]{Source Sans Pro}
 \setmonofont[Scale=MatchLowercase]{Hack}
 
 \usepackage{polyglossia}
@@ -50,7 +50,7 @@
 
 \title{The \texttt{fancyhandout} class \\ {\large\url{https://github.com/SFr682k/fancyhandout}}}
 \author{Sebastian Friedl \\ \href{mailto:sfr682k@t-online.de}{\ttfamily sfr682k@t-online.de}}
-\date{2017/12/08}
+\date{2018/01/18}
 
 \hypersetup{pdftitle={The fancyhandout class},pdfauthor={Sebastian Friedl}}
 
@@ -74,13 +74,13 @@
 	\addcontentsline{toc}{subsection}{Dependencies on other packages}
 	The \texttt{fancyhandout} class requires the following packages:
 	\begin{multicols}{3}\ttfamily\centering
-		geometry \\ enumitem
+		enumitem \\ geometry \\ xcolor
 	\end{multicols}
 	
 	\subsection*{License}
 	\begin{small}
 		\addcontentsline{toc}{subsection}{License}
-		\textcopyright\ 2017 Sebastian Friedl
+		\textcopyright\ 2017-18 Sebastian Friedl
 		
 		\smallskip
 		This work may be distributed and/or modified under the conditions of the \LaTeX\ Project Public License, either version 1.3c of this license or (at your option) any later version.
@@ -146,12 +146,18 @@
 			
 			\smallskip
 			Also, it is possible to construct the page area by loading the "typearea" package.
+		
+		\item \textbf{Paragraph indent} \\
+			The length of "\parindent" is set to "0pt" when loading "fancyhandout". If you want to change it, simply use some command like "\parindent 1em" after the class has been loaded to set "\parindent"'s length to it's initial value.
 	\end{itemize}
 	
 	
 	\section{Creating a handout}
 	"fancyhandout" currently behaves just like the \enquote{normal} article class. \\
-	As soon as there are relevant changes, this section will contain a step-by-step instruction on using "fancyhandout".
+	However, there is no possibility to pass short section, subsection and subsubsection names in square brackets.
+	
+	\bigskip
+	As soon as there are more relevant changes, this section will contain a step-by-step introduction on using "fancyhandout".
 	
 	
 	\clearpage
@@ -162,17 +168,18 @@
 			Add head- and footlines using the "fancyhdr" package
 		
 		\item
-			Redefine "\title", "\author" and "\date" such that they allow the usage of short versions.
-			Define "\subtitle" and "\institute" commands.
+			Define an "\institute" command.
 		
 		\item
-			Redefine "\maketitle" to obtain a coloured \enquote{Title block}
+			Improve the appereance of "\maketitle"?
 		
 		\item
-			Redefine "\section" \& co. to make them stand out
+			Create "toc" entries and PDF-bookmarks when using sectioning commands
 		
 		\item
 			Provide "beamer"-like boxes
 	\end{enumerate}
+	
+	The current aim is to release an initial version with basic functionality on CTAN before Feburary 28, 2018.
 \end{document}
 
