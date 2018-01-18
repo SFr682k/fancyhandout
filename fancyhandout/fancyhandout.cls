@@ -26,6 +26,7 @@
 
 
 \ProvidesClass{fancyhandout}[2018/01/18 fancyhandout development version]
+\NeedsTeXFormat{LaTeX2e}
 
 
 
@@ -99,14 +100,42 @@
 
 % REQUIRE OTHER PACKAGES -------------------------------------------------------------------------------------
 
-% TODO: Load fancyhdr
-
 \RequirePackage{enumitem}
 	\setlist{itemsep=0ex,topsep=.75ex}
+
+\RequirePackage{fancyhdr}
+	\pagestyle{fancy}
+	\fancyhead{}
+	\fancyfoot{}
+	\if@twoside%
+		\fancyhead[ro,le]{%
+			\insertshortauthor%
+			\ifx\@title\@empty\else \ifx\@author\empty\else :~\fi \fi%
+			\insertshorttitle}
+		\fancyfoot[ro,le]{\thepage}
+		\fancyfoot[re,lo]{\insertshortdate}
+	\else
+		\fancyhead[r]{%
+			\insertshortauthor%
+			\ifx\@title\@empty\else \ifx\@author\empty\else :~\fi \fi%
+			\insertshorttitle}
+		\fancyfoot[l]{\insertshortdate}
+		\fancyfoot[r]{\thepage}
+	\fi
+	\def\footrulewidth{0.4pt}
+	\headheight=14pt
+
+
+
 
 % Required when hyperref is not loaded by the user
 % This "fake command" gets redefined when hyperref is loaded
 \ifx\phantomsection\@undefined	\let\phantomsection\@empty	\fi
+% Also, write the document information to hyperref when loaded
+\AtBeginDocument{%
+	\ifx\hypersetup\@undefined\else%
+		\hypersetup{pdftitle=\inserttitle,pdfauthor=\insertauthor,pdfcreator={LaTeX with fancyhandout class}}%
+	\fi}
 
 \RequirePackage{xcolor}
 
@@ -174,7 +203,13 @@
 
 % SECTION COMMANDS -------------------------------------------------------------------------------------------
 
-% No numbering of sections and subsections inside the table of contents
+% TOC (Pt. I):  Add some space below
+\let\origtableofcontents\tableofcontents
+\def\tableofcontents{%
+	\origtableofcontents%
+	\vskip 1.5\bigskipamount}
+
+% TOC (Pt. II): No numbering of sections and subsections
 \renewcommand{\numberline}[1]{}
 
 % Own \section command

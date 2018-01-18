@@ -31,6 +31,7 @@
 \usepackage[unicode, pdfborder={0 0 0}]{hyperref}
 \usepackage{verbatim}
 
+\usepackage[erewhon]{newtxmath}
 \usepackage{fontspec}
 \setmainfont{erewhon}
 \setsansfont[Scale=MatchLowercase]{Source Sans Pro}
@@ -72,9 +73,9 @@
 	
 	\subsection*{Dependencies on other packages}
 	\addcontentsline{toc}{subsection}{Dependencies on other packages}
-	The \texttt{fancyhandout} class requires the following packages:
+	The "fancyhandout" class requires \LaTeXe\ and the following packages:
 	\begin{multicols}{3}\ttfamily\centering
-		enumitem \\ geometry \\ xcolor
+		enumitem \\ fancyhdr \\ geometry \\ xcolor
 	\end{multicols}
 	
 	\subsection*{License}
@@ -163,10 +164,10 @@
 	Following features are planned to be finished with the next versions of "fancyhandout":
 	\begin{enumerate}
 		\item
-			Add head- and footlines using the "fancyhdr" package
+			Define an "\institute" command.
 		
 		\item
-			Define an "\institute" command.
+			Make used colors changeable
 		
 		\item
 			Improve the appereance of "\maketitle"?
