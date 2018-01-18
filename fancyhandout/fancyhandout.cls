@@ -104,6 +104,9 @@
 \RequirePackage{enumitem}
 	\setlist{itemsep=0ex,topsep=.75ex}
 
+% Required when hyperref is not loaded by the user
+% This "fake command" gets redefined when hyperref is loaded
+\ifx\phantomsection\@undefined	\let\phantomsection\@empty	\fi
 
 \RequirePackage{xcolor}
 
@@ -171,6 +174,9 @@
 
 % SECTION COMMANDS -------------------------------------------------------------------------------------------
 
+% No numbering of sections and subsections inside the table of contents
+\renewcommand{\numberline}[1]{}
+
 % Own \section command
 \def\fancysection#1{%
 	\vskip 2\bigskipamount% \vskip, not \vspace; starts a new paragraph
@@ -209,25 +215,28 @@
 % Redefine article's sectioning commands
 \def\section{\@ifstar\@@section\@section}
 \def\@section#1{%
-	% TODO: Add toc-entry and hyperref bookmark
+	\phantomsection
+	\addcontentsline{toc}{section}{#1}
 	\@@section{#1}}
 \def\@@section#1{\fancysection{#1}}
 
 \def\subsection{\@ifstar\@@subsection\@subsection}
 \def\@subsection#1{%
-	% TODO: Add toc-entry and hyperref bookmark
+	\phantomsection
+	\addcontentsline{toc}{subsection}{#1}
 	\@@subsection{#1}}
 \def\@@subsection#1{\fancysubsection{#1}}
 
 \def\subsubsection{\@ifstar\@@subsubsection\@subsubsection}
 \def\@subsubsection#1{%
-	% TODO: Add toc-entry and hyperref bookmark
+	\phantomsection
+	\addcontentsline{toc}{subsubsection}{#1}
 	\@@subsubsection{#1}}
 \def\@@subsubsection#1{\fancysubsubsection{#1}}
 
 
 
-% LEFT TODOS -------------------------------------------------------------------------------------------------
+% OTHER TODOS ------------------------------------------------------------------------------------------------
 
 
 % TODO: Beamer styled boxes!!
