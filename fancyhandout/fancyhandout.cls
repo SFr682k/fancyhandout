@@ -125,9 +125,6 @@
 	\def\footrulewidth{0.4pt}
 	\headheight=14pt
 
-
-
-
 % Required when hyperref is not loaded by the user
 % This "fake command" gets redefined when hyperref is loaded
 \ifx\phantomsection\@undefined	\let\phantomsection\@empty	\fi
@@ -167,6 +164,10 @@
 \let\insertshortauthor\@empty
 \def\and{\qquad}
 %
+\def\institute{}
+\let\insertinstitute\@empty
+\let\insertshortinstitute\@empty
+%
 \def\date{}
 \let\insertdate\@empty
 \let\insertshortdate\@empty
@@ -181,6 +182,9 @@
 \renewcommand{\author}[2][\insertauthor]{%
 	\def\insertauthor{#2}%
 	\def\insertshortauthor{#1}}
+\renewcommand{\institute}[2][\insertinstitute]{%
+	\def\insertinstitute{#2}
+	\def\insertshortinstitute{#1}}
 \renewcommand{\date}[2][\insertdate]{%
 	\def\insertdate{#2}%
 	\def\insertshortdate{#1}}
@@ -191,10 +195,11 @@
 	\begin{center}
 		\fcolorbox{black}{blue}{\fcolorbox{black}{blue!10}{%
 			\parbox{.95\textwidth}{\centering\vspace{\medskipamount}%
-				\ifx\inserttitle\@empty\else {\LARGE\bfseries\inserttitle} \\[\medskipamount] \fi
+				\ifx\inserttitle\@empty\else {\LARGE\bfseries\inserttitle} \\[\smallskipamount] \fi
 				\ifx\insertsubtitle\@empty\else {\large\insertsubtitle} \\ \fi
 				\vspace{\medskipamount}\small
-				\ifx\insertauthor\@empty\else \insertauthor \\[\medskipamount] \fi
+				\ifx\insertauthor\@empty\else \insertauthor \ifx\insertinstitute\@empty \\[\medskipamount] \else \\ \fi
+				\ifx\insertinstitute\@empty\else \insertinstitute \\[\medskipamount] \fi
 				\insertdate
 		\vspace{\medskipamount}}}}%
 	\end{center}\smallskip}
