@@ -134,9 +134,29 @@
 		\hypersetup{pdftitle=\inserttitle,pdfauthor=\insertauthor,pdfcreator={LaTeX with fancyhandout class}}%
 	\fi}
 
+
+
+% COLOR SETTINGS ---------------------------------------------------------------------------------------------
+
 \RequirePackage{xcolor}
 
-%\RequirePackage{tikz}
+% Basic color
+\definecolor{fancyhandoutblue}{rgb}{0.2,0.2,0.7}
+
+% Initial definition of a primary and a secondary color
+\colorlet{fancyhandoutmaincolor}{fancyhandoutblue}
+\colorlet{fancyhandoutsecondarycolor}{fancyhandoutblue!85}
+
+% Line colors
+\colorlet{fancyhandoutsectlinecolor}{fancyhandoutmaincolor}
+\colorlet{fancyhandoutsubsectlinecolor}{fancyhandoutsecondarycolor}
+
+% Title box colors
+\colorlet{fancyhandouttboxlinecolor}{fancyhandoutmaincolor}
+\colorlet{fancyhandouttboxfillcolor}{fancyhandoutmaincolor!12.5}
+
+
+% TODO: Provide color configuration cmds / color themes?
 
 
 
@@ -189,19 +209,20 @@
 	\def\insertdate{#2}%
 	\def\insertshortdate{#1}}
 
-% TODO: Provide something to display the institute
+% Typesets a title box
 \def\maketitle{%
 	\thispagestyle{empty}
 	\begin{center}
-		\fcolorbox{black}{blue}{\fcolorbox{black}{blue!10}{%
-			\parbox{.95\textwidth}{\centering\vspace{\medskipamount}%
-				\ifx\inserttitle\@empty\else {\LARGE\bfseries\inserttitle} \\[\smallskipamount] \fi
-				\ifx\insertsubtitle\@empty\else {\large\insertsubtitle} \\ \fi
-				\vspace{\medskipamount}\small
-				\ifx\insertauthor\@empty\else \insertauthor \ifx\insertinstitute\@empty \\[\medskipamount] \else \\ \fi
-				\ifx\insertinstitute\@empty\else \insertinstitute \\[\medskipamount] \fi
-				\insertdate
-		\vspace{\medskipamount}}}}%
+		\fcolorbox{fancyhandouttboxlinecolor}{fancyhandouttboxlinecolor}{%
+			\fcolorbox{fancyhandouttboxlinecolor}{fancyhandouttboxfillcolor}{%
+				\parbox{.95\textwidth}{\centering\vspace{\medskipamount}%
+					\ifx\inserttitle\@empty\else {\LARGE\bfseries\inserttitle} \\[\smallskipamount] \fi
+					\ifx\insertsubtitle\@empty\else {\large\insertsubtitle} \\ \fi
+					\vspace{\medskipamount}\small
+					\ifx\insertauthor\@empty\else \insertauthor \ifx\insertinstitute\@empty \\[\medskipamount] \else \\ \fi
+					\ifx\insertinstitute\@empty\else \insertinstitute \\[\medskipamount] \fi
+					\insertdate
+				\vspace{\medskipamount}}}}%
 	\end{center}\smallskip}
 
 
@@ -224,7 +245,7 @@
 	\begin{minipage}{\textwidth}%
 	{\Large\bfseries%
 		#1}\vskip -1ex%
-	{\color{blue}\rule{\textwidth}{3pt}}
+	{\color{fancyhandoutsectlinecolor}\rule{\textwidth}{3pt}}
 	\end{minipage}
 	\vskip \bigskipamount%
 }
@@ -236,7 +257,7 @@
 	\begin{minipage}{\textwidth}%
 	{\large\bfseries%
 		#1}\vskip -1.25ex%
-	{\color{blue!70}\rule{\textwidth}{1.5pt}}
+	{\color{fancyhandoutsubsectlinecolor}\rule{\textwidth}{1.5pt}}
 	\end{minipage}
 	\vskip \medskipamount%
 }
