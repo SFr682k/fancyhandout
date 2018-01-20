@@ -15,8 +15,7 @@
 %%
 %%	---------------------------------------------------------------------------------------------------------------------------------------------
 %%
-%%	This class and its documentation are currently under construction.
-%%	Commands, options and behaviour may change with future versions of the class.
+%%	A LaTeX class for producing nice-looking handouts.
 %%
 %%	---------------------------------------------------------------------------------------------------------------------------------------------
 %%
@@ -25,8 +24,9 @@
 %%	--------------------------------------------------------------------------------------------------------------------------------------------- 
 
 
-\ProvidesClass{fancyhandout}[2018/01/20 fancyhandout development version]
+\ProvidesClass{fancyhandout}[2018/01/20 fancyhandout: A LaTeX class for producing nice-looking handouts]
 \NeedsTeXFormat{LaTeX2e}
+\RequirePackage{etoolbox}
 
 
 
@@ -99,6 +99,8 @@
 
 
 % REQUIRE OTHER PACKAGES -------------------------------------------------------------------------------------
+
+\AtEndPreamble{\RequirePackage{csquotes}}
 
 \RequirePackage{enumitem}
 	\setlist{itemsep=0ex,topsep=.75ex}
@@ -276,22 +278,28 @@
 % Redefine article's sectioning commands
 \def\section{\@ifstar\@@section\@section}
 \def\@section#1{%
-	\phantomsection
-	\addcontentsline{toc}{section}{#1}
+	\phantomsection%
+	\refstepcounter{section}%
+	\def\@currentlabel{\enquote{#1}}% Manipulate LaTeX's internal mechanisms to print the section name when using \ref >:)
+	\addcontentsline{toc}{section}{#1}%
 	\@@section{#1}}
 \def\@@section#1{\fancysection{#1}}
 
 \def\subsection{\@ifstar\@@subsection\@subsection}
 \def\@subsection#1{%
-	\phantomsection
-	\addcontentsline{toc}{subsection}{#1}
+	\phantomsection%
+	\refstepcounter{subsection}%
+	\def\@currentlabel{\enquote{#1}}%
+	\addcontentsline{toc}{subsection}{#1}%
 	\@@subsection{#1}}
 \def\@@subsection#1{\fancysubsection{#1}}
 
 \def\subsubsection{\@ifstar\@@subsubsection\@subsubsection}
 \def\@subsubsection#1{%
-	\phantomsection
-	\addcontentsline{toc}{subsubsection}{#1}
+	\phantomsection%
+	\refstepcounter{subsubsection}%
+	\def\@currentlabel{\enquote{#1}}%
+	\addcontentsline{toc}{subsubsection}{#1}%
 	\@@subsubsection{#1}}
 \def\@@subsubsection#1{\fancysubsubsection{#1}}
 
