@@ -1,4 +1,4 @@
-%%	This is file 'fancyhandout-doc.tex', Version 2018-01-18
+%%	This is file 'fancyhandout-doc.tex', Version 2018-01-20
 %%	Copyright 2017-18 Sebastian Friedl <sfr682k@t-online.de>
 %% 
 %%	This work may be distributed and/or modified under the conditions of the LaTeX Project
@@ -51,7 +51,7 @@
 
 \title{The \texttt{fancyhandout} class \\ {\large\url{https://github.com/SFr682k/fancyhandout}}}
 \author{Sebastian Friedl \\ \href{mailto:sfr682k@t-online.de}{\ttfamily sfr682k@t-online.de}}
-\date{2018/01/18}
+\date{2018/01/20}
 
 \hypersetup{pdftitle={The fancyhandout class},pdfauthor={Sebastian Friedl}}
 
@@ -108,7 +108,8 @@
 	
 	% DOCUMENTATION PART ----------------------------------------------------------------------
 	
-	\section{Loading \texttt{fancyhandout}}
+	\section{Creating a handout}
+	\subsection{Loading \texttt{fancyhandout}}
 	Load "fancyhandout" by using the "\documentclass" command.
 	
 	\bigskip
@@ -132,31 +133,123 @@
 	This option leads to using one side page layout.
 	
 	
+	\subsection{Providing document information}\label{docinfo}
+	Basic \LaTeX\ defines the commands "\title", "\author" and "\date" for providing document information. \\
+	When using "fancyhandout" the following ones are available:
 	
-	\section{Other configuration possibilities}
+	\medskip
+	\DescribeMacro{\title}
+	Sets the handout's title. \\[\smallskipamount]
+	\textit{Example:}\quad "\title{An introduction on \texttt{fancyhandout}}"
+	
+	\medskip
+	\DescribeMacro{\subtitle}
+	When required, a subtitle can be also provided. \\[\smallskipamount]
+	\textit{Example:}\quad "\subtitle{With some notes on \LaTeX\ itself}"
+	
+	\medskip
+	\DescribeMacro{\author}
+	Useful for specifying the author(s). \\
+	Multiple authors should be separated using the "\and" command inside "\author" (e.~g. "\author{J. Doe \and M. Mustermann}"). "\and" will expand to "\qquad" in the title and to ",~" in the headline. \\[\smallskipamount]
+	\textit{Example:}\quad "\author{Sebastian Friedl}"
+	
+	\medskip
+	\DescribeMacro{\institute}
+	Additional or instead of the author(s), it is also possible to specify the institute(s) name. \\
+	However, information about the institute won't be shown in the headline. \\[\smallskipamount]
+	\textit{Example:}\quad "\institute{University of Foo Bar City}"
+	
+	\medskip
+	\DescribeMacro{\date}
+	This command changes the date shown in the title and footline.
+	Like all other \LaTeX\ classes, "\date"'s value is "\today" until another value for "\date" is given. \\[\smallskipamount]
+	\textit{Example:}\quad "\date{20. January 2018}"
+	
+	\subsubsection*{Short version}
+	It is also possible to pass short versions of the command's values as an optional argument in squared braces.
+	These short values are used in the head- or footline. \\[\smallskipamount]
+	\textit{Example:}\quad "\author[S. Friedl]{Sebastian Friedl}"
+	
+	
+	\subsection{The handout title}
+	\DescribeMacro{\maketitle}
+	Using the "\maketitle" command, a colored title box displaying the information added like described in section \ref{docinfo} gets typeset.
+	
+	\medskip
+	The color of the box can be changed by "\colorlet"ting …
 	\begin{itemize}
-		\item \textbf{Lists} \\
-			By default, "fancyhandout" loads "enumitem" for setting "itemsep" to~"0ex" and reducing "topsep" to~".75ex". \\
-			These settings can be reverted or modified using the "\setlist" command (see the "itemsep" package documentation for further details).
+		\item "fancyhandouttboxlinecolor" \\
+			to change the color used for drawing the line around the title box \\[\smallskipamount]
+			\textit{Example:}\quad "\colorlet{fancyhandouttboxlinecolor}{red!80!black}"
 		
-		\item \textbf{Page margins} \\
-			"fancyhandout" uses the "geometry" package for setting the page margins to 2.25\,cm each, including page head and foot. \\
-			These margins (and the page geometry) can be modified using the "\geometry" command (see the "geometry" package documentation for further details).
-			
-			\smallskip
-			Also, it is possible to construct the page area by loading the "typearea" package.
-		
-		\item \textbf{Paragraph indent} \\
-			The length of "\parindent" is set to "0pt" when loading "fancyhandout". If you want to change it, simply use some command like "\parindent 1em" after the class has been loaded to set "\parindent"'s length to it's initial value.
+		\item "fancyhandouttboxfillcolor" \\
+			to change the color used for filling the title box \\[\smallskipamount]
+			\textit{Example:}\quad "\colorlet{fancyhandouttboxfillcolor}{red!10}"
 	\end{itemize}
 	
 	
-	\section{Creating a handout}
-	"fancyhandout" currently behaves just like the \enquote{normal} article class. \\
-	However, there is no possibility to pass short section, subsection and subsubsection names in square brackets.
+	\subsection{Sectioning}
+	\DescribeMacro{\section}\DescribeMacro{\subsection}\DescribeMacro{\subsubsection}
+	"fancyhandout" supports the three basic sectioning commands "\section", "\subsection" and "\subsubsection". These commands produce sections, subsections and subsubsections visible in the table of contents (TOC). \\
+	\DescribeMacro{\section*}\DescribeMacro{\subsection*}\DescribeMacro{\subsubsection*}
+	The starred versions "\section*", "\subsection*" and "\subsubsection*" are also provided and produce sections, subsections and subsubsections not visible in the table of contents.
+	
+	\medskip
+	All sections, subsections and subsubsections are \emph{not} numbered. \\
+	Section and subsection headings are underlined to stand out. The colors of these lines can be changed by "\colorlet"ting …
+	\begin{itemize}
+		\item "fancyhandoutsectlinecolor" \\
+			to change the color used for underlining section headings \\[\smallskipamount]
+			\textit{Example:}\quad "\colorlet{fancyhandoutsectlinecolor}{red!80!black}"
+		
+		\item "fancyhandoutsubsectlinecolor" \\
+			to change the color used for underlining subsection headings \\[\smallskipamount]
+			\textit{Example:}\quad "\colorlet{fancyhandoutsubsectlinecolor}{red!70!black!70}"
+	\end{itemize}
+	
+	\medskip
+	\textbf{Important note:} \\
+	Unlike "article"'s sectioning commands, "fancyhandout"'s sectioning commands do \emph{not} accept optional arguments in squared braces.
+	
+	
+	\subsection{The main content}
+	The main content may be any arbitrary \LaTeX\ code.
 	
 	\bigskip
-	As soon as there are more relevant changes, this section will contain a step-by-step introduction on using "fancyhandout".
+	However, there may be small problems when sections are involved:
+	\begin{itemize}
+		\item
+			Since "fancyhandout" redefines all section commands, you can't refer to \verb|\label|ed sections using the \verb|\ref| command.
+			If you do so anyway, \LaTeX\ will throw a warning about suppressed empty links. \\
+			For now, please use \enquote{workarounds} using \verb|\pageref| and a hard coded section name, e.~g. "see section “Introduction” on page \pageref{intro}".
+		
+		\item
+			Per-Section numberings (e.~g. of equations) may also behave somewhat different. \\
+			Generally, \enquote{undocumented features} may occur as soon as section numbers are involved. Solutions based on the current page number are definitely a better solution.
+	\end{itemize}
+	
+	
+	
+	
+	\section{Advanced settings}
+	\subsection{Lists}
+	By default, "fancyhandout" loads "enumitem" for setting "itemsep" to~"0ex" and reducing "topsep" to~".75ex". \\
+	\DescribeMacro{\setlist}
+	These settings can be reverted or modified using the "\setlist" command (see the "itemsep" package documentation for further details).
+	
+	\subsection{Page margins}
+	"fancyhandout" uses the "geometry" package for setting the page margins to 2.25\,cm each, including page head and foot. \\
+	\DescribeMacro{\geometry}
+	These margins (and the page geometry) can be modified using the "\geometry" command (see the "geometry" package documentation for further details).
+	
+	\smallskip
+	Also, it is possible to construct the page area by loading the "typearea" package.
+	
+	\subsection{Paragraph indent}
+	\DescribeMacro{\parindent}
+	The length of "\parindent" is set to "0pt" when loading "fancyhandout". If you want to change it, simply use some command like "\parindent 1em" after the class has been loaded to set "\parindent"'s length to it's initial value.
+	
+	
 	
 	
 	\clearpage
@@ -164,18 +257,21 @@
 	Following features are planned to be finished with the next versions of "fancyhandout":
 	\begin{enumerate}
 		\item
-			Make used colors changeable \\ (primary goal: configuration cmds; maybe also color themes?)
+			Modify \verb|\ref|'s behavior \\
+			\textit{Insert the section name when referencing to labeled sections}
 		
 		\item
-			Improve the appereance of "\maketitle"? Different styles?
+			Provide different styles for "\maketitle" \\
+			\textit{e.~g. centered text above a separation line}
 		
 		\item
-			Provide "beamer"-like boxes
+			Provide "beamer"-like block environments
 		
 		\item
-			Themes in general?
+			Provide color themes \\
+			\textit{e.~g. red, green, …}
 	\end{enumerate}
 	
-	The current aim is to release an initial version with basic functionality on CTAN before Feburary 28, 2018.
+	You may add other feature requests of public interest to the \href{https://github.com/SFr682k/fancyhandout/issues}{issue tracker on GitHub}.
 \end{document}
 

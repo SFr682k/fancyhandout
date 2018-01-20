@@ -1,4 +1,4 @@
-%%	This is file 'fancyhandout.cls', Version 2017-01-18
+%%	This is file 'fancyhandout.cls', Version 2018-01-20
 %%	Copyright 2017-18 Sebastian Friedl <sfr682k@t-online.de>
 %% 
 %%	This work may be distributed and/or modified under the conditions of the LaTeX Project
@@ -25,7 +25,7 @@
 %%	--------------------------------------------------------------------------------------------------------------------------------------------- 
 
 
-\ProvidesClass{fancyhandout}[2018/01/18 fancyhandout development version]
+\ProvidesClass{fancyhandout}[2018/01/20 fancyhandout development version]
 \NeedsTeXFormat{LaTeX2e}
 
 
@@ -109,6 +109,7 @@
 	\fancyfoot{}
 	\if@twoside%
 		\fancyhead[ro,le]{%
+			\def\and{\unskip,~}%
 			\insertshortauthor%
 			\ifx\@title\@empty\else \ifx\@author\empty\else :~\fi \fi%
 			\insertshorttitle}
@@ -116,6 +117,7 @@
 		\fancyfoot[re,lo]{\insertshortdate}
 	\else
 		\fancyhead[r]{%
+			\def\and{\unskip,~}
 			\insertshortauthor%
 			\ifx\@title\@empty\else \ifx\@author\empty\else :~\fi \fi%
 			\insertshorttitle}
@@ -156,9 +158,6 @@
 \colorlet{fancyhandouttboxfillcolor}{fancyhandoutmaincolor!12.5}
 
 
-% TODO: Provide color configuration cmds / color themes?
-
-
 
 % FONT SETTINGS ----------------------------------------------------------------------------------------------
 
@@ -182,15 +181,15 @@
 \def\author{}
 \let\insertauthor\@empty
 \let\insertshortauthor\@empty
-\def\and{\qquad}
+\let\and\@empty
 %
 \def\institute{}
 \let\insertinstitute\@empty
 \let\insertshortinstitute\@empty
 %
 \def\date{}
-\let\insertdate\@empty
-\let\insertshortdate\@empty
+\let\insertdate\today
+\let\insertshortdate\today
 
 % Set the according variable when a command is used
 \renewcommand{\title}[2][\inserttitle]{%
@@ -211,6 +210,7 @@
 
 % Typesets a title box
 \def\maketitle{%
+	\def\and{\qquad}%
 	\thispagestyle{empty}
 	\begin{center}
 		\fcolorbox{fancyhandouttboxlinecolor}{fancyhandouttboxlinecolor}{%
