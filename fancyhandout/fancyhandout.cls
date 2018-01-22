@@ -1,4 +1,4 @@
-%%	This is file 'fancyhandout.cls', Version 2018-01-20
+%%	This is file 'fancyhandout.cls', Version 2018-01-22
 %%	Copyright 2017-18 Sebastian Friedl <sfr682k@t-online.de>
 %% 
 %%	This work may be distributed and/or modified under the conditions of the LaTeX Project
@@ -24,7 +24,7 @@
 %%	--------------------------------------------------------------------------------------------------------------------------------------------- 
 
 
-\ProvidesClass{fancyhandout}[2018/01/20 fancyhandout: A LaTeX class for producing nice-looking handouts]
+\ProvidesClass{fancyhandout}[2018/01/22 fancyhandout: A LaTeX class for producing nice-looking handouts]
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{etoolbox}
 
@@ -113,7 +113,7 @@
 		\fancyhead[ro,le]{%
 			\def\and{\unskip,~}%
 			\insertshortauthor%
-			\ifx\@title\@empty\else \ifx\@author\empty\else :~\fi \fi%
+			\ifx\insertshorttitle\@empty\else\ifx\insertshortauthor\empty\else :~\fi\fi%
 			\insertshorttitle}
 		\fancyfoot[ro,le]{\thepage}
 		\fancyfoot[re,lo]{\insertshortdate}
@@ -121,7 +121,7 @@
 		\fancyhead[r]{%
 			\def\and{\unskip,~}
 			\insertshortauthor%
-			\ifx\@title\@empty\else \ifx\@author\empty\else :~\fi \fi%
+			\ifx\insertshortauthortitle\@empty\else\ifx\insertshortauthor\empty\else :~\fi\fi%
 			\insertshorttitle}
 		\fancyfoot[l]{\insertshortdate}
 		\fancyfoot[r]{\thepage}

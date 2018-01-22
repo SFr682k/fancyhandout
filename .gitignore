@@ -1,5 +1,8 @@
 # Ignore test files
-blub.*
+blub*
+moin*
+lol*
+
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
