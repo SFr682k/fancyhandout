@@ -121,7 +121,7 @@
 		\fancyhead[r]{%
 			\def\and{\unskip,~}
 			\insertshortauthor%
-			\ifx\insertshortauthortitle\@empty\else\ifx\insertshortauthor\empty\else :~\fi\fi%
+			\ifx\insertshorttitle\@empty\else\ifx\insertshortauthor\empty\else :~\fi\fi%
 			\insertshorttitle}
 		\fancyfoot[l]{\insertshortdate}
 		\fancyfoot[r]{\thepage}
