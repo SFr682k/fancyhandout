@@ -5,7 +5,7 @@ Many students conducting a presentation are asked to provide a handout containin
 However, LaTeX has never been designed for typesetting such documents mostly consisting out of bullet points.  
 
 `fancyhandout` breaks up with some of LaTeX's principles and redefines basic LaTeX commands with the aim of producing well-designed and clear structured handouts:  
-A \textsf{sans-serif} font is used by default, sections are not numbered and highlighted by underlining them, head- and footline display document information and for avoiding too large whitespace around the text, the margin sizes are adjusted to a proper value.  
+A sans-serif font is used by default, sections are not numbered and highlighted by underlining them, head- and footline display document information and for avoiding too large whitespace around the text, the margin sizes are adjusted to a proper value.  
 
 All together, `fancyhandout` provides a way of typesetting documents not exclusively consisting of running text in a beautiful way.
 
