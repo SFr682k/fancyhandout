@@ -221,7 +221,7 @@
 					\ifx\inserttitle\@empty\else {\LARGE\bfseries\inserttitle} \\[\smallskipamount] \fi
 					\ifx\insertsubtitle\@empty\else {\large\insertsubtitle} \\ \fi
 					\vspace{\medskipamount}\small
-					\ifx\insertauthor\@empty\else \insertauthor \ifx\insertinstitute\@empty \\[\medskipamount] \else \\ \fi
+					\ifx\insertauthor\@empty\else \insertauthor \ifx\insertinstitute\@empty \\[\medskipamount] \else \\ \fi\fi
 					\ifx\insertinstitute\@empty\else \insertinstitute \\[\medskipamount] \fi
 					\insertdate
 				\vspace{\medskipamount}}}}%
